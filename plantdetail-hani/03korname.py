@@ -92,7 +92,7 @@ column_mapping = {
     'postngplaceCodeNm': '배치장소 코드명(콤마(,)로 구분)',
     'dlthtsCode': '병충해 코드(콤마(,)로 구분)',
     'dlthtsCodeNm': '병충해 코드(콤마(,)로 구분)',
-    'cntntsSj': '컨텐츠 제목'
+    'cntntsSj': '식물 명'
 }
 
 

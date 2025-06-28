@@ -3,9 +3,12 @@ import xmltodict
 import json
 import csv
 import time
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 url = 'http://api.nongsaro.go.kr/service/garden/gardenDtl'
-api_key = '20250626K8HCI4KNPYS4XFEDFUBXVA'
+api_key = os.getenv('PLANT_API_KEY')
 
 # cntntsNo와 cntntsSj 불러오기
 plant_meta = {}

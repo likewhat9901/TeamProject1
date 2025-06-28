@@ -1,10 +1,13 @@
+import os
 import requests
 import xmltodict
 import json
 import csv
+from dotenv import load_dotenv
 
+load_dotenv()
 url = 'http://api.nongsaro.go.kr/service/garden/gardenList'
-api_key = '20250626K8HCI4KNPYS4XFEDFUBXVA'
+api_key = os.getenv('PLANT_API_KEY')
 
 plant_list = []
 

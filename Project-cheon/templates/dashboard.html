@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>스마트팜 대시보드</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2>🌿 SmartFarm</h2>
+      <nav>
+        <ul>
+          <li><a href="#">개요</a></li>
+          <li><a href="#">센서 데이터</a></li>
+          <li><a href="#">리포트</a></li>
+          <li><a href="#">설정</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <h1>스마트팜 모니터링</h1>
+        <div class="user-info">
+          <span>관리자</span>
+          <button onclick="location.href='/map'">Map🗺</button>
+        </div>
+      </header>
+      <section class="cards">
+        <div class="card">
+          <h3>기온</h3>
+          <p>{{ temp_value }} °C</p>
+        </div>
+        <div class="card">
+          <h3>습도</h3>
+          <p>{{ humi_value }} %</p>
+        </div>
+        <div class="card">
+          <h3>1시간 강수량</h3>
+          <p>{{ rain_value }} mm</p>
+        </div>
+        <div class="card">
+          <h3>풍속</h3>
+          <p>{{ wind_value }} m/s</p>
+        </div>
+      </section>
+      <section class="charts">
+        <div class="chart-box">
+          <h3>시간별 온도</h3>
+          <canvas id="tempChart"></canvas>
+        </div>
+        <div class="chart-box">
+          <h3>시간별 습도</h3>
+          <canvas id="humidityChart"></canvas>
+        </div>
+      </section>
+      <section class="ranking">
+        <div class="ranking-table-container">
+          <div class="ranking-table-header">
+            <h2>인기식물 순위</h2>
+            <button class="ranking-select-btn">SELECT</button>
+          </div>
+          <table class="ranking-table">
+            <thead>
+              <tr>
+                <th>순위</th>
+                <th>식물명</th>
+                <th>소매가격</th>
+                <th>등락률</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>파</td>
+                <td>5,100</td>
+                <td>+2</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>감자</td>
+                <td>600</td>
+                <td>-1</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>배추</td>
+                <td>1,600</td>
+                <td>+4</td>
+              </tr>
+              <tr><td>4</td><td></td><td></td><td></td></tr>
+              <tr><td>5</td><td></td><td></td><td></td></tr>
+              <tr><td>6</td><td></td><td></td><td></td></tr>
+              <tr><td>7</td><td></td><td></td><td></td></tr>
+              <tr><td>8</td><td></td><td></td><td></td></tr>
+              <tr><td>9</td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // 온도 차트
+    new Chart(document.getElementById('tempChart').getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: ['08:00', '10:00', '12:00', '14:00', '16:00'],
+        datasets: [{
+          label: '온도 (°C)',
+          data: [20, 21, 23, 22, 21],
+          borderColor: '#42A5F5',
+          fill: false,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+
+    // 습도 차트
+    new Chart(document.getElementById('humidityChart').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['08:00', '10:00', '12:00', '14:00', '16:00'],
+        datasets: [{
+          label: '습도 (%)',
+          data: [55, 58, 60, 62, 59],
+          backgroundColor: '#66BB6A'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
